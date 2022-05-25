@@ -7,7 +7,7 @@ const handleLogout = async (req, res) => {
 
     // get cookies from request and send response if no cookies
     const cookies = req.cookies;
-    if (!cookies?.jwt) return res.sendStatus(204); // No content
+    if (!cookies.jwt) return res.sendStatus(204); // No content
 
     // get refreshToken from cookies (stored as jwt in cookies)
     const refreshToken = cookies.jwt;
