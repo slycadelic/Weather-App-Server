@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -11,7 +10,7 @@ const cookieParser = require('cookie-parser');
 const credentials = require('./middleware/credentials');
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
-const PORT = process.env.PORT || 3500;
+const PORT = 3500;
 
 // Connect to the database
 connectDB();
