@@ -10,7 +10,7 @@ const verifyRoles = (...allowedRoles) => {
         // The optional chaining operator provides a way to simplify accessing 
         // values through connected objects when it's possible that a reference 
         // or function may be undefined or null.
-        if(!req?.roles) return res.sendStatus(401);
+        if(!req.roles) return res.sendStatus(401);
 
         // store all allowed Roles in an array using the spread operator
         const rolesArray = [...allowedRoles];
