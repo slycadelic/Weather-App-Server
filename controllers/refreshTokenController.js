@@ -10,6 +10,9 @@ const handleRefreshToken = async (req, res) => {
     const cookies = req.cookies;
     if (!cookies?.jwt) return res.sendStatus(401);
     const refreshToken = cookies.jwt;
+    
+    const ACCESS_TOKEN_SECRET='01c6d59179e1fcf38f7856bb1889ec69484d8cb877e65ef85eec16dd529fccb7ac998c8d3e4df1d12c97e76ddd9bcc98113c6f563d9e216e2e06d960de586c54';
+    const REFRESH_TOKEN_SECRET='3dec14f47e98c5b49d3bac0dd33ea89774e202570c51d3a45a89f1f4827d26d467c95c26a25b6d28c09bd0cdc412cc0c2686c0e88f03143e30ef1aeb284a1c4a';
 
     // Find user who is logged in or send response if not found
     const foundUser = await User.findOne({ refreshToken }).exec();
@@ -24,7 +27,7 @@ const handleRefreshToken = async (req, res) => {
     // send the new access token back as response 
     jwt.verify(
         refreshToken,
-        process.env.REFRESH_TOKEN_SECRET,
+        REFRESH_TOKEN_SECRET,
         (err, decoded) => {
             if(err || foundUser.username !== decoded.username) return res.sendStatus(403);
             const roles = Object.values(foundUser.roles);
@@ -35,7 +38,7 @@ const handleRefreshToken = async (req, res) => {
                         'roles': roles
                     }
                 },
-                process.env.ACCESS_TOKEN_SECRET,
+                ACCESS_TOKEN_SECRET,
                 { expiresIn: '5m' }
             );
             res.json({ roles, accessToken })
