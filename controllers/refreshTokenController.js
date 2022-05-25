@@ -8,7 +8,7 @@ const handleRefreshToken = async (req, res) => {
     
     // refresh tokens stored in cookies called jwt so check first if it exists
     const cookies = req.cookies;
-    if (!cookies?.jwt) return res.sendStatus(401);
+    if (!cookies.jwt) return res.sendStatus(401);
     const refreshToken = cookies.jwt;
     
     const ACCESS_TOKEN_SECRET='01c6d59179e1fcf38f7856bb1889ec69484d8cb877e65ef85eec16dd529fccb7ac998c8d3e4df1d12c97e76ddd9bcc98113c6f563d9e216e2e06d960de586c54';
