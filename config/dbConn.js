@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
+    const DATABASE_URI='mongodb+srv://admin:BillabonG@userdata.ludac.mongodb.net/UserDB?retryWrites=true&w=majority'
     try {
-        await mongoose.connect(process.env.DATABASE_URI, {
+        await mongoose.connect(DATABASE_URI, {
             useUnifiedTopology: true,
             useNewUrlParser: true
         })
