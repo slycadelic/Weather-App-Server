@@ -12,6 +12,8 @@ const verifyJWT = (req, res, next) => {
     // Split on ' ' and extract from 1st position (position starts from 0)
     const token = authHeader.split(' ')[1];
     
+    const ACCESS_TOKEN_SECRET='01c6d59179e1fcf38f7856bb1889ec69484d8cb877e65ef85eec16dd529fccb7ac998c8d3e4df1d12c97e76ddd9bcc98113c6f563d9e216e2e06d960de586c54';
+    
     // verify token using verify() method
     // takes the token, the token secret and a callback function
     // callback function takes an error and decoded object
@@ -22,7 +24,7 @@ const verifyJWT = (req, res, next) => {
     // calling next() enables the middleware to call the next middleware function 
     jwt.verify(
         token,
-        process.env.ACCESS_TOKEN_SECRET,
+        ACCESS_TOKEN_SECRET,
         (err, decoded) => {
             if(err) return res.sendStatus(403); //invalid token
             req.user = decoded.UserInfo.username;
