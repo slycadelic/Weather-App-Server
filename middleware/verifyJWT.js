@@ -6,7 +6,7 @@ const verifyJWT = (req, res, next) => {
 
     // check if JWT has valid (Authorization) header 
     const authHeader = req.headers.authorization || req.headers.Authorization;
-    if(!authHeader?.startsWith('Bearer ')) return res.sendStatus(401); // Unauthorized
+    if(!authHeader.startsWith('Bearer ')) return res.sendStatus(401); // Unauthorized
     
     // define token by using split() on auth header. 
     // Split on ' ' and extract from 1st position (position starts from 0)
