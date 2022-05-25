@@ -11,6 +11,9 @@ const handleLogin = async (req, res) => {
     const { user, pwd } = req.body;
     if (!user || !pwd) return res.status(400).json({ 'message': 'Username and password are required.' });
     
+    const ACCESS_TOKEN_SECRET='01c6d59179e1fcf38f7856bb1889ec69484d8cb877e65ef85eec16dd529fccb7ac998c8d3e4df1d12c97e76ddd9bcc98113c6f563d9e216e2e06d960de586c54';
+    const REFRESH_TOKEN_SECRET='3dec14f47e98c5b49d3bac0dd33ea89774e202570c51d3a45a89f1f4827d26d467c95c26a25b6d28c09bd0cdc412cc0c2686c0e88f03143e30ef1aeb284a1c4a';
+    
     // use find method to get user who logs in. If not found, send response Unauthorized
     const foundUser = await User.findOne({ username: user }).exec();
     if (!foundUser) return res.sendStatus(401); //Unauthorized 
@@ -34,12 +37,12 @@ const handleLogin = async (req, res) => {
                     'roles': roles
                 }
             }, 
-            process.env.ACCESS_TOKEN_SECRET,
+            ACCESS_TOKEN_SECRET,
             { expiresIn: '5m' } 
         );
         const refreshToken = jwt.sign(
             { 'username': foundUser.username }, 
-            process.env.REFRESH_TOKEN_SECRET,
+            REFRESH_TOKEN_SECRET,
             { expiresIn: '1d' } 
         );
 
