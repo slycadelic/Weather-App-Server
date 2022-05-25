@@ -2,7 +2,7 @@ const axios = require('axios')
 
 const getWeather = async (req, res) => {
     const base = "https://api.openweathermap.org/data/2.5/weather?q=";
-    const key = process.env.OPEN_WEATHER_API_KEY;
+    const key = '85760a4c3e670fed1a6c1307fe4d3558';
     const query = req.query.cityName;
 
     try {
